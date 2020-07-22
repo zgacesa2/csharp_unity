@@ -187,3 +187,77 @@ Kada je score 10 neka se ispiše u konzoli "pobjedio si". Neka po terenu ima i c
 Kada izgubi health neka se pokrene zvuk da je izgubio health. 
 Ako vam hp padne na 0 ili manje neka se u konzoli ispiše "umro si" (možete više skripti koristiti). 
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Zadatak7 : MonoBehaviour
+{
+    public int score, hp;
+    public float force;
+    Rigidbody rb;
+    public AudioClip pokupio;
+    public AudioClip izgubio;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        InputManager();
+        Die();
+    }
+
+    private void Die()
+    {
+        if(hp <= 0)
+        {
+            Debug.Log("Umro si");
+	    audioSource.clip = izgubio;
+	    audioSource.Play();
+        }
+    }
+
+    private void InputManager()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.AddForce(transform.forward * force);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb.AddForce(transform.forward * -force);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.AddForce(transform.right * -force);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.AddForce(transform.right * force);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Sfera")
+        {
+            score++;
+	    audioSource.clip = dobio;
+	    audioSource.Play();
+        }
+
+        if (other.gameObject.tag == "Kapsula")
+        {
+            hp -= 10;
+        }
+    }
+}
