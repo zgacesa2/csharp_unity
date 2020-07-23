@@ -1,0 +1,5 @@
+Papirici:
+
+1.)Napiši kako pozivamo metodu za nalaženje Transform komponente objekta koji se zove keks
+
+2.) Promijeni glasnocu audio sourca prema javnoj varijabli
