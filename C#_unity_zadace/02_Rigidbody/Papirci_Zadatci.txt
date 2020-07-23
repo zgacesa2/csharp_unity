@@ -1,0 +1,61 @@
+Papirici:
+
+1) Kreiraj kocku (cube). Napisi skriptu tako da kocka ubrzava prema dolje 10 m/s. Kada dosegne y = 0 neka stane.
+
+
+private RigidBody rb;
+
+private void Start() 
+{
+	rb = GetComponent<RigidBody>();
+	rb.velocity = Vector3.down * 10f;
+}
+
+private void Update() 
+{
+	if(transform.position.y <= 0f) 
+	{
+		rb.velocity = Vector3.zero;
+	}
+}
+
+
+2) dodijeli rigidbody na skriptu
+
+Rigidbody rb;
+
+void Start()
+{
+	rb = GetComponent<Rigidbody>();
+}
+
+3) Zamrzni kretanje po svim pozicija i sve rotacije s jednom naredbom
+
+rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+4) Napisi skriptu koja generira silu na objekt prema specificnoj tocki, npr (10, 10, 10)
+
+public Rigidbody rb;
+
+public Vector3 tocka;
+public Vector3 trenutnaPozicija;
+
+private void Start ()
+
+{
+	rb = GetComponent<RigidBody>();
+	tocka = new Vector3 (10,10,10);
+	trenutnaPozicija = transform.position;
+	
+}
+
+private void Update()
+
+{
+	rb.addForce(tocka - trenutnaPozicija);
+
+}
+
+
+
+
